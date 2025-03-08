@@ -1,8 +1,8 @@
 import QtQuick
 
 Window {
-    width: 640
-    height: 480
+    width: 1024
+    height: 640
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Viewer3D")
 }
