@@ -61,6 +61,8 @@ jobs:
         chmod +x linuxdeployqt-continuous-x86_64.AppImage
         ./linuxdeployqt-continuous-x86_64.AppImage --appimage-extract
         mv squashfs-root/usr/bin/linuxdeployqt /usr/local/bin/
+
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/squashfs-root/usr/lib/
         
         linuxdeployqt viewer3D/Viewer3D -qmldir=src/ -bundle-non-qt-libs
         tar -czvf viewer3D.tar.gz -C viewer3D .
