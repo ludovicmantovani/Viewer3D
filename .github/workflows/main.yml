@@ -54,17 +54,14 @@ jobs:
     - name: Package Linux App
       if: matrix.os == 'ubuntu-latest'
       run: |
-        mkdir -p viewer3D
-        cp build/Release/appViewer3D viewer3D
-
-        wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-        chmod +x linuxdeployqt-continuous-x86_64.AppImage
-        ./linuxdeployqt-continuous-x86_64.AppImage --appimage-extract
-        mv squashfs-root/usr/bin/linuxdeployqt /usr/local/bin/
-
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/squashfs-root/usr/lib/
-        
-        linuxdeployqt viewer3D/Viewer3D -qmldir=src/ -bundle-non-qt-libs
+       docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace ubuntu:20.04 /bin/bash -c "
+        apt update && apt install -y wget patchelf qtbase5-dev qtchooser qt5-qmake qttools5-dev-tools &&
+        wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage &&
+        chmod +x linuxdeployqt-continuous-x86_64.AppImage &&
+        ./linuxdeployqt-continuous-x86_64.AppImage --appimage-extract &&
+        mv squashfs-root/usr/bin/linuxdeployqt /usr/local/bin/ &&
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/workspace/squashfs-root/usr/lib/ &&
+        linuxdeployqt viewer3D/appViewer3D -qmldir=src/ -bundle-non-qt-libs &&
         tar -czvf viewer3D.tar.gz -C viewer3D .
     
     - name: Create GitHub Release
