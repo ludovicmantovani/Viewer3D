@@ -31,7 +31,8 @@ jobs:
       with:
         version: '6.8.1'
     
-    - uses: ilammy/msvc-dev-cmd@v1
+    - name: Configure MSVC (windows)
+      uses: ilammy/msvc-dev-cmd@v1
       if: matrix.os == 'windows-latest'
     
     - name: Configure and build
@@ -42,7 +43,7 @@ jobs:
     - name: Package Windows App
       if: matrix.os == 'windows-latest'
       run: |
-        windeployqt --release --dir viewer3D build\Release\Viewer3D.exe
+        windeployqt --release --dir viewer3D build\Release\appViewer3D.exe
         cd viewer3D
         7z a ../viewer3D.zip *
       shell: cmd
@@ -54,7 +55,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         mkdir -p viewer3D
-        cp build/Release/Viewer3D viewer3D
+        cp build/Release/appViewer3D viewer3D
         linuxdeployqt viewer3D/Viewer3D -qmldir=src/ -bundle-non-qt-libs
         tar -czvf viewer3D.tar.gz -C viewer3D .
     
