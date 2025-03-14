@@ -48,10 +48,23 @@ jobs:
         cd viewer3D
         7z a ../viewer3D.zip *
       shell: cmd
+    
+    - name: Get current date
+      id: date
+      run: echo "tag=$(date +'%Y-%m-%d-%H%M%S')" >> $GITHUB_ENV
+      shell: bash
+    
+    - name: Create Git Tag
+      run: |
+        git tag ${{ env.tag }}
+        git push origin ${{ env.tag }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: ${{ env.tag }}
         files: |
           viewer3D.zip
           # viewer3D.tar.gz
