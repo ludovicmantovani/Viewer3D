@@ -56,6 +56,11 @@ jobs:
       run: |
         mkdir -p viewer3D
         cp build/Release/appViewer3D viewer3D
+
+        wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+        chmod +x linuxdeployqt-continuous-x86_64.AppImage
+        sudo mv linuxdeployqt-continuous-x86_64.AppImage /usr/local/bin/linuxdeployqt
+        
         linuxdeployqt viewer3D/Viewer3D -qmldir=src/ -bundle-non-qt-libs
         tar -czvf viewer3D.tar.gz -C viewer3D .
     
