@@ -46,6 +46,9 @@ jobs:
         7z a ../viewer3D.zip *
       shell: cmd
 
+    - name: Debug Build Folder
+      run: ls -l build/
+    
     - name: Package Linux App
       if: matrix.os == 'ubuntu-latest'
       run: |
