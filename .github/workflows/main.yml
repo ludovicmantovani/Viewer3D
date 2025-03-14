@@ -49,17 +49,21 @@ jobs:
         7z a ../viewer3D.zip *
       shell: cmd
     
+    - name: Configure Git
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "github-actions@github.com"
+
     - name: Get current date
       id: date
       run: echo "tag=$(date +'%Y-%m-%d-%H%M%S')" >> $GITHUB_ENV
       shell: bash
     
-    - name: Create Git Tag
+    - name: Create and Push Git Tag
       run: |
         git tag ${{ env.tag }}
-        git push origin ${{ env.tag }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        git push https://${{ secrets.PAT_GITHUB }}@github.com/${{ github.repository }}.git ${{ env.tag }}
+
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
