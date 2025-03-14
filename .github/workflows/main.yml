@@ -44,7 +44,7 @@ jobs:
     - name: Package Windows App
       if: matrix.os == 'windows-latest'
       run: |
-        windeployqt --release --dir viewer3D build\Release\appViewer3D.exe
+        windeployqt --release --dir viewer3D Release\appViewer3D.exe
         cd viewer3D
         7z a ../viewer3D.zip *
       shell: cmd
