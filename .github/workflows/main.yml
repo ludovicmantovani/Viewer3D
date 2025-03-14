@@ -11,7 +11,8 @@ jobs:
     name: "Build and Release"
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest]
+        # os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -53,7 +54,7 @@ jobs:
       with:
         files: |
           viewer3D.zip
-          viewer3D.tar.gz
+          # viewer3D.tar.gz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
