@@ -49,11 +49,11 @@ jobs:
         7z a ../viewer3D.zip *
       shell: cmd
 
-    - name: Archive Windows version
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: windows-build
-        path: ../viewer3D.zip
+        name: viewer3D-archive
+        path: viewer3D.zip
     
     
         
