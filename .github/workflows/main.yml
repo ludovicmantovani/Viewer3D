@@ -41,18 +41,23 @@ jobs:
         cmake -S . -B build -G "Ninja Multi-Config"
         cmake --build build --config Release
 
+    - name: Check if executable exists
+      run: |
+        if not exist build\Release\appViewer3D.exe exit 1
+      shell: cmd
+
     - name: Package Windows App
       if: matrix.os == 'windows-latest'
       run: |
+        dir Build\Release
         windeployqt --release --dir viewer3D Build\Release\appViewer3D.exe
-        cd viewer3D
-        7z a ../viewer3D.zip *
+        dir viewer3D
       shell: cmd
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: viewer3D.zip
+        name: viewer3D
         path: viewer3D
     
     
