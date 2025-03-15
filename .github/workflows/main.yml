@@ -52,8 +52,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: viewer3D-archive
-        path: viewer3D.zip
+        name: viewer3D.zip
+        path: viewer3D
     
     
         
