@@ -6,23 +6,23 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QString>
-#include <fstream>
-#include <iostream>
+// #include <fstream>
+// #include <iostream>
 
 int main(int argc, char *argv[]) {
 
-  std::cout << "HELLO WORLD !!!!" << std::endl;
+  // std::cout << "HELLO WORLD !!!!" << std::endl;
 
-  std::ofstream outfile("test.txt");
+  // std::ofstream outfile("test.txt");
 
-  outfile << "my text here!" << std::endl;
+  // outfile << "my text here!" << std::endl;
 
-  outfile.close();
+  // outfile.close();
 
-  return 0;
-  // QGuiApplication app(argc, argv);
+  // return 0;
+  QGuiApplication app(argc, argv);
 
-  // QQmlApplicationEngine engine;
+  QQmlApplicationEngine engine;
 
   // QCommandLineParser parser;
   // parser.setApplicationDescription("Viewer3D Application");
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
   // parser.process(app);
 
   // // Retrieve file path from arguments
-  // QString filePath;
+  QString filePath = {};
 
   // QString currentFilePath = parser.value(fileOption);
 
@@ -57,12 +57,12 @@ int main(int argc, char *argv[]) {
   //   currentFilePath;
   // }
 
-  // // Expose filePath to QML
-  // engine.rootContext()->setContextProperty("filePath", filePath);
-  // QObject::connect(
-  //     &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
-  //     []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
-  // engine.loadFromModule("Viewer3D", "Main");
+  // Expose filePath to QML
+  engine.rootContext()->setContextProperty("filePath", filePath);
+  QObject::connect(
+      &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
+      []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
+  engine.loadFromModule("Viewer3D", "Main");
 
-  // return app.exec();
+  return app.exec();
 }
