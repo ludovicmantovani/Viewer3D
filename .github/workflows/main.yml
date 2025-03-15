@@ -44,16 +44,14 @@ jobs:
     - name: Package Windows App
       if: matrix.os == 'windows-latest'
       run: |
-        mkdir viewer3D
-        xcopy /E /I /Y Build\Release\ viewer3D\
-        windeployqt6 --release --dir viewer3D viewer3D\appViewer3D.exe
+        windeployqt6 --release Build\Release\appViewer3D.exe
       shell: cmd
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: viewer3D
-        path: viewer3D
+        path: Build\Release/
     
     
         
