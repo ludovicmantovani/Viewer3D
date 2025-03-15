@@ -44,6 +44,7 @@ jobs:
     - name: Check Release folder
       run: |
         dir Build\Release
+        dir D:\a\Viewer3D\Viewer3D\build\Viewer3D
 
     - name: Package Windows App
       if: matrix.os == 'windows-latest'
