@@ -53,7 +53,6 @@ jobs:
 
     - name: Copy QML files
       run: |
-        mkdir -p build/Release/qml
         cp -r build/Viewer3D/*.qml build/Release/qml/
         cp -r build/Viewer3D/qmldir build/Release/qml/
       shell: pwsh
