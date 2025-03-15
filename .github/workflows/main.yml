@@ -41,6 +41,10 @@ jobs:
         cmake -S . -B build -G "Ninja Multi-Config"
         cmake --build build --config Release
 
+    - name: Check Release folder
+      run: |
+        dir Build\Release
+
     - name: Package Windows App
       if: matrix.os == 'windows-latest'
       run: |
