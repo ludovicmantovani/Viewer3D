@@ -6,50 +6,55 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QString>
+#include <iostream>
 
 int main(int argc, char *argv[]) {
-  QGuiApplication app(argc, argv);
 
-  QQmlApplicationEngine engine;
+  std::cout << "HELLO WORLD !!!!" << std::endl;
+  return 0;
+  // QGuiApplication app(argc, argv);
 
-  QCommandLineParser parser;
-  parser.setApplicationDescription("Viewer3D Application");
-  parser.addHelpOption();
-  parser.addVersionOption();
+  // QQmlApplicationEngine engine;
 
-  QCommandLineOption fileOption(QStringList() << "f"
-                                              << "file",
-                                "Path to the file to load", "filePath");
-  parser.addOption(fileOption);
+  // QCommandLineParser parser;
+  // parser.setApplicationDescription("Viewer3D Application");
+  // parser.addHelpOption();
+  // parser.addVersionOption();
 
-  parser.process(app);
+  // QCommandLineOption fileOption(QStringList() << "f"
+  //                                             << "file",
+  //                               "Path to the file to load", "filePath");
+  // parser.addOption(fileOption);
 
-  // Retrieve file path from arguments
-  QString filePath;
+  // parser.process(app);
 
-  QString currentFilePath = parser.value(fileOption);
+  // // Retrieve file path from arguments
+  // QString filePath;
 
-  QFileInfo fileInfo(currentFilePath);
-  currentFilePath = fileInfo.absoluteFilePath();
+  // QString currentFilePath = parser.value(fileOption);
 
-  // Check if the file exists
-  QFile file(currentFilePath);
-  if (file.exists() && file.open(QIODevice::ReadOnly)) {
-    filePath = currentFilePath;
+  // QFileInfo fileInfo(currentFilePath);
+  // currentFilePath = fileInfo.absoluteFilePath();
 
-    // Log info about the file
-    qInfo() << "File is valid and can be read:" << filePath;
-    file.close(); // Close the file after checking
-  } else {
-    qWarning() << "File does not exist or cannot be read:" << currentFilePath;
-  }
+  // // Check if the file exists
+  // QFile file(currentFilePath);
+  // if (file.exists() && file.open(QIODevice::ReadOnly)) {
+  //   filePath = currentFilePath;
 
-  // Expose filePath to QML
-  engine.rootContext()->setContextProperty("filePath", filePath);
-  QObject::connect(
-      &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
-      []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
-  engine.loadFromModule("Viewer3D", "Main");
+  //   // Log info about the file
+  //   qInfo() << "File is valid and can be read:" << filePath;
+  //   file.close(); // Close the file after checking
+  // } else {
+  //   qWarning() << "File does not exist or cannot be read:" <<
+  //   currentFilePath;
+  // }
 
-  return app.exec();
+  // // Expose filePath to QML
+  // engine.rootContext()->setContextProperty("filePath", filePath);
+  // QObject::connect(
+  //     &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
+  //     []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
+  // engine.loadFromModule("Viewer3D", "Main");
+
+  // return app.exec();
 }
