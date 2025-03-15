@@ -44,8 +44,8 @@ jobs:
     - name: Package Windows App
       if: matrix.os == 'windows-latest'
       run: |
-        copy Build\Release\appViewer3D.exe viewer3D\
         windeployqt --release --dir viewer3D Build\Release\appViewer3D.exe
+        copy Build\Release\appViewer3D.exe viewer3D\
       shell: cmd
 
     - name: Upload artifact
